@@ -16,10 +16,12 @@ public class PublicApiController {
     @Autowired private GitProperties gitProperties;
 
     @GetMapping("/api/public/appinfo")
-    public Map<String, String> appinfo(HttpServletRequest request){
-        Map<String, String> info = new HashMap<>();
-        info.put("ip-server", request.getLocalAddr());
-        info.put("ip-client", request.getRemoteAddr());
+    public Map<String, Object> appinfo(HttpServletRequest request){
+        Map<String, Object> info = new HashMap<>();
+        info.put("server-ip", request.getLocalAddr());
+        info.put("server-port", request.getLocalPort());
+        info.put("client-ip", request.getRemoteAddr());
+        info.put("client-port", request.getRemotePort());
         info.put("app-version", gitProperties.getShortCommitId());
         return info;
     }
