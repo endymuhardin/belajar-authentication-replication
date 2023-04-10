@@ -9,3 +9,10 @@ services:
       - 5432:5432
     volumes:
       - ./db-belajar:/var/lib/postgresql/data
+  
+  load-balancer:
+    image: nginx
+    ports:
+      - 10000:10000
+    volumes:
+      - ./nginx/loadbalancer.conf:/etc/nginx/nginx.conf:ro
